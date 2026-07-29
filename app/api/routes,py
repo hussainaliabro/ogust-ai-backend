@@ -1,0 +1,21 @@
+from fastapi import APIRouter
+from app.models.request_models import PDFRequest
+from app.services.ai_service import generate_content
+from app.services.pdf_service import create_pdf
+
+router = APIRouter()
+
+@router.post("/generate-pdf")
+async def generate_pdf(request: PDFRequest):
+
+    content = generate_content(request)
+
+    filename = create_pdf(
+        title=request.title,
+        content=content
+    )
+
+    return {
+        "status": "success",
+        "filename": filename
+    }
