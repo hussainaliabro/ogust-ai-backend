@@ -6,6 +6,7 @@ from app.models.request_models import (
     GenerateDocumentRequest,
 )
 
+
 from app.models.response_models import (
     StartDocumentResponse,
     ReplyQuestionsResponse,
