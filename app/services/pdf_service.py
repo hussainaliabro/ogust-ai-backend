@@ -11,7 +11,10 @@ async def create_pdf(title, content):
     filename = f"{output_dir}/{title}.pdf"
 
     async with async_playwright() as p:
-        browser = await p.chromium.launch()
+        browser = await p.chromium.launch(
+            headless=True,
+            args=["--no-sandbox", "--disable-dev-shm-usage"]
+        )
         page = await browser.new_page()
 
         await page.set_content(content, wait_until="networkidle")

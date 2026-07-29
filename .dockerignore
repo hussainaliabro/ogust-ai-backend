@@ -3,4 +3,3 @@ venv/
 __pycache__/
 *.pyc
 app/generated/pdfs/
-app/services/pdf_service.py

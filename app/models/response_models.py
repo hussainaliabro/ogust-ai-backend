@@ -50,20 +50,12 @@ class ReplyQuestionsResponse(BaseResponse):
 # Generate Response
 # ---------------------------------------------------------
 
-class GeneratedFiles(BaseModel):
-    html: str
-
-    pdf: str
-
-    docx: str
-
-
 class GenerateDocumentResponse(BaseResponse):
     session_id: str
 
     document_title: str
 
-    files: GeneratedFiles
+    html: str
 
 
 # ---------------------------------------------------------

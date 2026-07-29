@@ -10,7 +10,6 @@ from app.models.response_models import (
     StartDocumentResponse,
     ReplyQuestionsResponse,
     GenerateDocumentResponse,
-    GeneratedFiles,
 )
 
 from app.services.ai_service import (
@@ -20,11 +19,6 @@ from app.services.ai_service import (
 
 from app.services.session_service import session_service
 
-from app.services.pdf_service import (
-    create_pdf,
-    save_docx,
-    save_html,
-)
 
 router = APIRouter(prefix="/document", tags=["Document"])
 @router.post(
@@ -104,33 +98,12 @@ async def generate_document_route(
 
     html = generate_document(session)
 
-    html_path = save_html(
-        session.title,
-        html,
-    )
+    session_service.mark_generated(session.session_id)
 
-    pdf_path = await create_pdf(
-        session.title,
-        html,
-    )
-
-    docx_path = save_docx(
-        session.title,
-        html,
-    )
-
-    session_service.mark_generated(
-        session.session_id
-    )
-
-    return GenerateDocumentResponse(
-        status="success",
-        message="Document generated successfully.",
-        session_id=session.session_id,
-        document_title=session.title,
-        files=GeneratedFiles(
-            html=html_path,
-            pdf=pdf_path,
-            docx=docx_path,
-        ),
-    )
+    return {
+        "status": "success",
+        "message": "Document generated successfully.",
+        "session_id": session.session_id,
+        "document_title": session.title,
+        "html": html
+    }
