@@ -126,12 +126,15 @@ The result must be immediately renderable by any HTML-to-PDF engine.
 
 Return ONLY valid HTML.
 
+the pdf will be rendered in A4 pages formate so care fully create document that have properly A4 pages so that pdf would not look like broken.
+
 Never return:
 - Markdown
 - JSON
 - Explanations
 - Code fences
 - Commentary
+
 
 ==================================================
 DESIGN PHILOSOPHY
