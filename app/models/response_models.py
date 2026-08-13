@@ -55,8 +55,6 @@ class GeneratedFiles(BaseModel):
 
     pdf: str
 
-    docx: str
-
 
 class GenerateDocumentResponse(BaseResponse):
     session_id: str
